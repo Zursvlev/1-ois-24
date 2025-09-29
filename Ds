@@ -1,12 +1,793 @@
-1<!IDOCTYPE HTML>
-2 <html lang="ru">
-3 <head>
-4     <meta charset="UTF-8">
-5 </head>
-6 <body>
-     <р>Задание 05.11.2024</p>
-     <р>Выполнил студент группы 1-ОИС-24</p>
-     <p>Журавлёв Евгений Вячеславович</p>
-     <р>Преподаватель: Марлэс Назармамбетов</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOO "Kazakh IT" - IT решения для бизнеса</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0054A6; /* Синий цвет флага Казахстана */
+            --secondary: #F0C300; /* Золотой цвет флага Казахстана */
+            --accent: #00AF66; /* Зеленый для акцентов */
+            --dark: #333333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #003d7a 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(rgba(0, 84, 166, 0.8), rgba(0, 61, 122, 0.9)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* О компании */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Услуги */
+        .services {
+            background-color: #f0f4f8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Преимущества */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .advantage-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-item h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Контакты */
+        .contact {
+            background: linear-gradient(135deg, var(--primary) 0%, #003d7a 100%);
+            color: white;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact .section-title h2::after {
+            background-color: var(--secondary);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav li {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+                max-width: 250px;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">KIT</div>
+                    <div class="logo-text">OOO "<span>Kazakh IT</span>"</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#advantages">Преимущества</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>IT решения для вашего бизнеса</h1>
+            <p>OOO "Kazakh IT" - ведущая IT-компания в Казахстане, предлагающая полный спектр услуг по разработке программного обеспечения, веб-разработке и IT-консалтингу.</p>
+            <a href="#contact" class="btn">Связаться с нами</a>
+            <a href="#services" class="btn btn-outline">Наши услуги</a>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>О компании</h2>
+                <p>Узнайте больше о нашей компании и нашем подходе к работе</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Мы создаем инновационные IT-решения с 2010 года</h3>
+                    <p>OOO "Kazakh IT" была основана в 2010 году с целью предоставления качественных IT-услуг для бизнеса в Казахстане и за его пределами. За годы работы мы реализовали более 500 проектов для клиентов из различных отраслей.</p>
+                    <p>Наша команда состоит из высококвалифицированных специалистов, которые постоянно совершенствуют свои навыки и следят за последними тенденциями в IT-индустрии.</p>
+                    <p>Мы гордимся тем, что наши решения помогают бизнесу становиться эффективнее, увеличивать прибыль и расширять клиентскую базу.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Офис Kazakh IT">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Мы предлагаем широкий спектр IT-услуг для вашего бизнеса</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Разработка ПО</h3>
+                    <p>Создаем индивидуальное программное обеспечение для автоматизации бизнес-процессов и повышения эффективности работы.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Веб-разработка</h3>
+                    <p>Разрабатываем современные веб-сайты и веб-приложения с адаптивным дизайном и высокой производительностью.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Мобильные приложения</h3>
+                    <p>Создаем нативные и кроссплатформенные мобильные приложения для iOS и Android.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>Облачные решения</h3>
+                    <p>Предоставляем услуги по миграции в облако, настройке и поддержке облачной инфраструктуры.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Кибербезопасность</h3>
+                    <p>Обеспечиваем защиту ваших данных и IT-инфраструктуры от современных киберугроз.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>IT-консалтинг</h3>
+                    <p>Помогаем выбрать оптимальные IT-решения для вашего бизнеса и разработать стратегию цифровой трансформации.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section id="advantages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши преимущества</h2>
+                <p>Почему клиенты выбирают именно нас</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-number">500+</div>
+                    <h3>Успешных проектов</h3>
+                    <p>Реализовали более 500 проектов для клиентов из различных отраслей</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-number">12+</div>
+                    <h3>Лет опыта</h3>
+                    <p>Более 12 лет успешной работы на IT-рынке Казахстана</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-number">50+</div>
+                    <h3>Специалистов</h3>
+                    <p>В нашей команде работают более 50 высококвалифицированных специалистов</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-number">24/7</div>
+                    <h3>Техподдержка</h3>
+                    <p>Круглосуточная техническая поддержка для наших клиентов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Свяжитесь с нами для обсуждения вашего проекта</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Наши контакты</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Адрес:</strong><br>
+                            г. Нур-Султан, пр. Кабанбай батыра, 56
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Телефон:</strong><br>
+                            +7 (7172) 123-456
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email:</strong><br>
+                            info@kazakh-it.kz
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <strong>Время работы:</strong><br>
+                            Пн-Пт: 9:00 - 18:00
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Отправить сообщение</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="email" placeholder="Ваш email" required>
+                        <input type="text" placeholder="Тема сообщения" required>
+                        <textarea placeholder="Ваше сообщение" required></textarea>
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>OOO "Kazakh IT"</h3>
+                    <p>Ведущая IT-компания в Казахстане, предоставляющая полный спектр IT-услуг для бизнеса.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                        <a href="#" class="social-link">tw</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Разработка ПО</a></li>
+                        <li><a href="#">Веб-разработка</a></li>
+                        <li><a href="#">Мобильные приложения</a></li>
+                        <li><a href="#">Облачные решения</a></li>
+                        <li><a href="#">Кибербезопасность</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Команда</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 OOO "Kazakh IT". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Фиксированная навигация при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 84, 166, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary) 0%, #003d7a 100%)';
+            }
+        });
+
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Адаптивное меню
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                nav.style.display = 'flex';
+            } else {
+                nav.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
